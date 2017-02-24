@@ -13,38 +13,10 @@ module.exports = generators.Base.extend({
     this.prompt([{
       name: 'moduleName',
       message: 'What do you want to name your module?',
-      default: this.appname.replace(/\s/g, '-'),
+      default: this.appname.replace(/\s/g, '-')
     }, {
-      name: 'githubUsername',
-      message: 'What is your GitHub username?',
-      store: true,
-    },{
-      name: 'includeTravis',
-      message: 'Include TravisCI?',
-      type : 'confirm',
-      default : true
-    },{
-      name: 'includeCoveralls',
-      message: 'Include coveralls.io integration?',
-      type : 'confirm',
-      default : true
-    }, {
-      type: 'checkbox',
-      name: 'features',
-      message: 'What more would you like?',
-      choices: [{
-        name: 'lodash',
-        value: 'lodash',
-        checked: false
-      }, {
-        name: 'request',
-        value: 'request',
-        checked: false
-      }, {
-        name: 'async',
-        value: 'async',
-        checked: false
-      }]
+      name: 'moduleDescription',
+      message: 'Describe your module'
     }], function (props) {
       self.formProps = props;
       cb();
@@ -59,24 +31,18 @@ module.exports = generators.Base.extend({
       self.templatePath('**/*'),
       self.destinationPath('.'), {
         info: {
-          travis : self.formProps.includeTravis,
-          coveralls : self.formProps.includeCoveralls,
-          githubUsername: self.formProps.githubUsername,
           moduleName: self.formProps.moduleName,
+          moduleDescription: self.formProps.moduleDescription,
           name: self.user.git.name(),
           email: self.user.git.email(),
         }
       }
     );
-    mv('travis.yml', '.travis.yml');
     mv('npmignore', '.npmignore');
     mv('tern-project', '.tern-project');
     mv('gitignore', '.gitignore');
     mv('jshintrc','.jshintrc');
     mv('_package.json','package.json');
-    if(!self.formProps.includeTravis){
-      self.fs.delete(self.destinationPath('.travis.yml'));
-    }
   },
   gitInit: function () {
     this.spawnCommandSync('git', ['init']);

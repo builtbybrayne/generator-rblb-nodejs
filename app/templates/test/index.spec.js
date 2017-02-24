@@ -1,7 +1,9 @@
 'use strict';
-import {expect} from 'chai';
-import myModule from '../source/';
+const chai = require("chai");
+const expect = chai.expect;
+chai.use(require('chai-as-promised'));
 
+const myModule = require("../src/");
 
 describe('My module', function(){
   it('Says hello world', () => {

@@ -3,7 +3,7 @@ var path = require('path');
 var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 
-describe('generator-nm-es6', function () {
+describe('generator-nm-nodejs', function () {
 
   before(function (done) {
     helpers.run(path.join(__dirname, 'app'))
@@ -16,18 +16,18 @@ describe('generator-nm-es6', function () {
   });
 
   it('Renames and puts dot files', function(){
-    assert.file(['.gitignore', 'gulpfile.js', '.jshintrc', 'README.md', '.travis.yml', 'package.json']);
+    assert.file(['.gitignore', 'gulpfile.js', '.jshintrc', 'README.md', 'package.json']);
   });
 
   it('initializes git repo', function(){
     assert.file('.git');
   });
 
-  it('copies source and test folders with files', function(){
+  it('copies src and test folders with files', function(){
     assert.file([
-      'source',
+      'src',
       'test',
-      'source/index.js',
+      'src/index.js',
       'test/index.spec.js'
     ]);
   });

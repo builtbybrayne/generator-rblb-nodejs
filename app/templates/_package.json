@@ -1,43 +1,37 @@
 {
   "name": "<%= info.moduleName %>",
   "version": "1.0.0",
-  "description": "My node module",
+  "description": "<%= info.moduleDescription %>",
   "main": "dist/index.js",
   "scripts": {
-    "test": "parallelshell 'npm run mocha' 'npm run watch:jshint'",
-    "test:cover": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha",
-    "test:coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "watch:jshint" : "watch 'jshint source --reporter=./node_modules/jshint-stylish/index.js' source/",
-    "mocha": "mocha test --compilers js:babel-core/register --watch",
+    "test:hint": "parallelshell 'npm run mocha' 'npm run watch:jshint'",
+    "watch:jshint" : "watch 'jshint src --reporter=./node_modules/jshint-stylish/index.js' src/",
+    "mocha": "mocha test --watch --recursive",
     "ci": "npm run test:cover && npm run test:coveralls",
     "relink": "npm unlink && npm link",
-    "build": "rm -rf dist/* && npm run copy:others && babel source --out-dir dist && npm run relink",
-    "copy:others": "rsync -avm --exclude='*.js' ./source/* ./dist"
+    "build": "npm run relink",
+    "copy:others": "rsync -avm --exclude='*.js' ./src/* ./dist"
   },
-  "repository" : "<%= info.githubUsername %>/<%= info.moduleName %>",
+  "repository" : "",
   "author": {
-    "name": "<%= info.name %>",
-    "email": "<%= info.email %>"
+    "name": "Alastair Brayne",
+    "email": "al@builtbybrayne.com",
+    "url": "http://builtbybrayne.com"
   },
-  "license": "ISC",
+  "license": "UNLICENSED",
   "devDependencies": {
-    "babel-cli": "^6.4.0",
-    "babel-core": "^6.4.0",
-    "babel-preset-es2015": "^6.1.18",
     "chai": "^3.4.1",
-    "coveralls": "^2.11.6",
-    "isparta": "^4.0.0",
+    "chai-as-promised": "^6.0.0",
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.1.0",
     "mocha": "^2.3.4",
     "watch": "^0.17.1",
-    "parallelshell": "^2.0.0"
+    "parallelshell": "^2.0.0",
+    "sinon": "^1.17.7"
   },
   "dependencies": {
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
+    "winston": "^2.3.1",
+    "lodash": "^4.17.4",
+    "es6-promisify": "^5.0.0"
   }
 }
