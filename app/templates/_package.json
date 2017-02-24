@@ -2,7 +2,7 @@
   "name": "<%= info.moduleName %>",
   "version": "1.0.0",
   "description": "<%= info.moduleDescription %>",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test:hint": "parallelshell 'npm run mocha' 'npm run watch:jshint'",
     "watch:jshint" : "watch 'jshint src --reporter=./node_modules/jshint-stylish/index.js' src/",
