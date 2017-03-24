@@ -6,11 +6,10 @@
   "scripts": {
     "test:hint": "parallelshell 'npm run mocha' 'npm run watch:jshint'",
     "watch:jshint" : "watch 'jshint src --reporter=./node_modules/jshint-stylish/index.js' src/",
-    "mocha": "mocha test --watch --recursive",
-    "ci": "npm run test:cover && npm run test:coveralls",
+    "mocha": "mocha test/**/*.spec.js --watch",
+    "test": "mocha test/**/*.spec.js",
     "relink": "npm unlink && npm link",
-    "build": "npm run relink",
-    "copy:others": "rsync -avm --exclude='*.js' ./src/* ./dist"
+    "build": "npm run relink"
   },
   "repository" : "",
   "author": {
@@ -27,7 +26,9 @@
     "mocha": "^2.3.4",
     "watch": "^0.17.1",
     "parallelshell": "^2.0.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "winston": "^2.3.1",
